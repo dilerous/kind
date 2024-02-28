@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kuard-wildcard-tls
+  namespace: kuard
+spec:
+  secretName: kuard-wildcard-tls
+  renewBefore: 240h
+  dnsNames:
+  - '*.kind.dilerous.cloud'
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

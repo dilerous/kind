@@ -1,16 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{},"name":"kuard","namespace":"kuard"},"spec":{"rules":[{"host":"kuard.kind.dilerous.cloud","http":{"paths":[{"backend":{"service":{"name":"kuard","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}
-  creationTimestamp: "2024-02-28T03:41:02Z"
-  generation: 1
   name: kuard
   namespace: kuard
-  resourceVersion: "933"
-  uid: d8725b07-9b37-49bf-8910-add54ad50a13
 spec:
+  tls:
+  - hosts:
+    - kuard.kind.dilerous.cloud
+    secretName: kuard-wildcard-tls
   rules:
   - host: kuard.kind.dilerous.cloud
     http:
@@ -22,7 +19,3 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-status:
-  loadBalancer:
-    ingress:
-    - hostname: localhost

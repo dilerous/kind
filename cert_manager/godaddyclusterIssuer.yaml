@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  namespace: cert-manager
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: brad.soper@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-account-key
+    solvers:
+    - selector:
+        dnsNames:
+        - '*.kind.dilerous.cloud'
+      dns01:
+        webhook:
+          config:
+            apiKeySecretRef:
+              name: godaddy-api-key-prod
+              key: key
+              secret: secret
+            production: true
+            ttl: 600
+          groupName: kind.dilerous.cloud
+          solverName: godaddy

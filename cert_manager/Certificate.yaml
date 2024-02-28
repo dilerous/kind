@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-manager-wildcard-tls
+  namespace: cert-manager
+spec:
+  secretName: cert-manager-wildcard-tls
+  renewBefore: 240h
+  dnsNames:
+  - '*.kind.dilerous.cloud'
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

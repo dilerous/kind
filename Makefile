@@ -11,3 +11,13 @@ ingress:
 
 kuard:
 				kubectl apply -f ./kuard
+
+certmanager:
+				helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --create-namespace --version v1.14.3 --set installCRDs=true
+
+godaddy:
+				helm upgrade -i godaddy-webhook godaddy-webhook/godaddy-webhook \
+    		--set groupName=kind.dilerous.cloud  \
+    		--set image.tag=v1.27.1 \
+    		--set image.pullPolicy=Always \
+    		--namespace cert-manager
